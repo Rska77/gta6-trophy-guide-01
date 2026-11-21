@@ -1,38 +1,36 @@
-// Hand-in for the make.fun GTA VI trophy guide bounty: copy the static app and its screenshots into the output
-// directory, then write the dossier the judge reads. Node 22 runs this TypeScript directly; the standard library is
-// all it needs.
-import { cpSync, existsSync, mkdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-frontend.ts';
 
-const repo = fileURLToPath(new URL('.', import.meta.url));
-const output = resolve(process.env.MAKEFUN_OUTPUT_DIR?.trim() || '/output');
+const repoRoot = import.meta.dirname;
+const outputDir = resolve(process.env.MAKEFUN_OUTPUT_DIR || '/output');
+
+function replaceCopy(source: string, target: string): void {
+  rmSync(target, { recursive: true, force: true });
+  cpSync(source, target, { recursive: true });
+}
 
 try {
-  const app = join(repo, 'app');
-  const screenshots = join(repo, 'screenshots');
-  for (const source of [app, screenshots]) {
-    if (!existsSync(source) || !statSync(source).isDirectory()) {
-      throw new Error(`missing directory: ${source}`);
-    }
+  if (outputDir === resolve(repoRoot)) {
+    throw new Error('refusing to use the repository root as the output directory');
   }
-  if (output === resolve(repo) || output === resolve(app) || output === resolve(screenshots)) {
-    throw new Error(`refusing to use ${output} as the output directory: it would replace the entry's own files`);
-  }
+  mkdirSync(outputDir, { recursive: true });
+  replaceCopy(join(repoRoot, 'app'), join(outputDir, 'app'));
+  replaceCopy(join(repoRoot, 'screenshots'), join(outputDir, 'screenshots'));
 
-  mkdirSync(output, { recursive: true });
-  for (const name of ['app', 'screenshots']) {
-    rmSync(join(output, name), { recursive: true, force: true });
-  }
-  cpSync(app, join(output, 'app'), { recursive: true });
-  cpSync(screenshots, join(output, 'screenshots'), { recursive: true });
+  const dossier = buildDossier(outputDir, {
+    text_max_bytes: 163840,
+    screenshots: { max: 8, max_bytes: 4 * 1024 * 1024 },
+    app_max_files: 993,
+    app_max_bytes: 16777216,
+  });
+  const dossierPath = join(outputDir, 'dossier.json');
+  writeFileSync(dossierPath, dossier);
 
-  const dossier = buildDossier(output, { text_max_bytes: 163840 });
-  writeFileSync(join(output, 'dossier.json'), dossier);
-
-  console.log(`Wrote ${join(output, 'dossier.json')}`);
+  console.log(`wrote ${dossierPath} (${statSync(dossierPath).size} bytes)`);
+  console.log(`app copied to ${join(outputDir, 'app')}`);
+  console.log(`screenshots copied to ${join(outputDir, 'screenshots')}`);
 } catch (error) {
-  console.error(`Hand-in failed: ${error instanceof Error ? error.message : String(error)}`);
+  console.error(`main.ts failed: ${(error as Error).message}`);
   process.exitCode = 1;
 }

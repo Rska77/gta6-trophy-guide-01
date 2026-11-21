@@ -1,6 +1,26 @@
 [
-  { "file": "1-roadmap.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "2-trophies.jpg", "path": "/", "view": "trophies", "scroll": 260, "viewport": { "width": 1280, "height": 800 } },
-  { "file": "3-detail.jpg", "path": "/", "view": "trophies", "open": "You WAiNKer!", "scroll": 700, "viewport": { "width": 1280, "height": 800 } },
-  { "file": "4-progress.jpg", "path": "/", "view": "progress", "scroll": 180, "viewport": { "width": 1280, "height": 800 } }
+  {
+    "file": "1-roadmap.jpg",
+    "path": "/",
+    "caption": "The roadmap view lays out the route to the platinum as six phase cards, from the opening chapters through cleanup.",
+    "viewport": { "width": 1280, "height": 800 }
+  },
+  {
+    "file": "2-trophies.jpg",
+    "path": "/",
+    "caption": "The full trophy list with filters for status and grade chips, so the remaining trophies are easy to narrow down.",
+    "viewport": { "width": 1280, "height": 800 }
+  },
+  {
+    "file": "3-detail.jpg",
+    "path": "/",
+    "caption": "A trophy detail panel open on its guide, with the walkthrough steps and the sources behind them visible.",
+    "viewport": { "width": 1280, "height": 800 }
+  },
+  {
+    "file": "4-progress.jpg",
+    "path": "/",
+    "caption": "The progress view with phase meters, overall completion, and the save and transfer controls for moving a run.",
+    "viewport": { "width": 1280, "height": 800 }
+  }
 ]

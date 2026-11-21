@@ -1,185 +1,224 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark">
-<meta name="description" content="A complete, spoiler-aware roadmap to all 55 Grand Theft Auto VI trophies on PlayStation 5.">
-<title>Leonida Legend — GTA VI trophy guide</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css">
+<head><link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#080d20">
+  <meta name="description" content="An offline trophy route and progress tracker for Grand Theft Auto VI on PlayStation 5.">
+  <title>Leonida Legend · GTA VI Trophy Guide &amp; Tracker</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to the guide</a>
 
-<header class="hero">
-  <div class="hero-copy">
-    <p class="eyebrow">Grand Theft Auto VI · PlayStation 5 · 55 trophies</p>
-    <h1>Leonida <span>Legend</span></h1>
-    <p class="lede">A complete route to the platinum: every trophy explained, grouped into six phases, with spoiler-safe guides and a checklist that remembers where you stopped.</p>
-  </div>
-  <div class="progress-card" aria-live="polite">
-    <div class="ring" id="ring" role="img" aria-label="0 percent complete">
-      <span id="ring-pct">0%</span>
-    </div>
-    <div class="progress-copy">
-      <strong id="progress-count">0 of 55 earned</strong>
-      <span id="progress-next">Start with the opening story missions.</span>
-    </div>
-  </div>
-</header>
-
-<nav class="tabs" role="tablist" aria-label="Guide sections">
-  <button class="tab is-active" type="button" role="tab" data-view="roadmap" aria-selected="true" aria-controls="view-roadmap">Roadmap</button>
-  <button class="tab" type="button" role="tab" data-view="trophies" aria-selected="false" aria-controls="view-trophies">All trophies</button>
-  <button class="tab" type="button" role="tab" data-view="progress" aria-selected="false" aria-controls="view-progress">Progress</button>
-</nav>
-
-<main id="main">
-  <section id="view-roadmap" class="view" aria-labelledby="roadmap-title">
-    <div class="section-head">
-      <div>
-        <h2 id="roadmap-title">Route to the platinum</h2>
-        <p class="sub">Story first, side strands while they unlock, then the grinds in an order that keeps travel useful.</p>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">GRAND THEFT AUTO VI · PLAYSTATION 5 · 55 TROPHIES</p>
+        <h1>Leonida Legend</h1>
+        <p class="subtitle">A calm route through every trophy: plan the next step, tick what you earn, and keep story surprises under wraps.</p>
       </div>
-      <button class="ghost" type="button" id="jump-next">Open next trophy</button>
-    </div>
-
-    <article class="next-up" id="next-up" aria-live="polite"></article>
-
-    <div class="phase-grid" id="phase-grid"></div>
-
-    <section class="grade-panel" aria-labelledby="grade-title">
-      <div class="section-head">
-        <div>
-          <h2 id="grade-title">Trophy breakdown</h2>
-          <p class="sub">Six silvers and two golds carry the long tails. The platinum arrives with the last one.</p>
+      <div class="hero-status">
+        <div class="status-item">
+          <span class="status-label">Progress</span>
+          <strong id="progress-line">0 of 55 earned</strong>
+        </div>
+        <div class="status-item next-status">
+          <span class="status-label">Next up</span>
+          <span id="next-line">Next: loading the route…</span>
         </div>
       </div>
-      <div class="grade-bars" id="grade-bars"></div>
-    </section>
-  </section>
+    </header>
 
-  <section id="view-trophies" class="view" hidden aria-labelledby="trophies-title">
-    <div class="section-head">
-      <div>
-        <h2 id="trophies-title">All 55 trophies</h2>
-        <p class="sub" id="result-count">Showing 55 of 55</p>
+    <nav class="tabbar" aria-label="Guide sections">
+      <div class="tablist" role="tablist" aria-label="Guide sections">
+        <button id="tab-roadmap" class="tab" type="button" role="tab" aria-selected="true" aria-controls="view-roadmap" tabindex="0">Roadmap</button>
+        <button id="tab-trophies" class="tab" type="button" role="tab" aria-selected="false" aria-controls="view-trophies" tabindex="-1">All trophies</button>
+        <button id="tab-progress" class="tab" type="button" role="tab" aria-selected="false" aria-controls="view-progress" tabindex="-1">Progress</button>
       </div>
-      <button class="ghost" type="button" id="clear-filters">Clear filters</button>
-    </div>
+    </nav>
 
-    <div class="filters" role="search">
-      <label class="field grow">
-        <span>Search</span>
-        <input id="f-q" type="search" placeholder="Mission, contact, activity…" autocomplete="off">
-      </label>
-      <label class="field">
-        <span>Grade</span>
-        <select id="f-grade">
-          <option value="all">All grades</option>
-          <option value="platinum">Platinum</option>
-          <option value="gold">Gold</option>
-          <option value="silver">Silver</option>
-          <option value="bronze">Bronze</option>
-        </select>
-      </label>
-      <label class="field">
-        <span>Category</span>
-        <select id="f-category"><option value="all">All categories</option></select>
-      </label>
-      <label class="field">
-        <span>Phase</span>
-        <select id="f-phase"><option value="all">All phases</option></select>
-      </label>
-      <label class="field">
-        <span>Status</span>
-        <select id="f-status">
-          <option value="all">Everything</option>
-          <option value="todo">Still to do</option>
-          <option value="done">Earned</option>
-          <option value="missable">Missable</option>
-          <option value="save">Save first</option>
-        </select>
-      </label>
-      <label class="field">
-        <span>Sort</span>
-        <select id="f-sort">
-          <option value="route">Route order</option>
-          <option value="easiest">Easiest first</option>
-          <option value="longest">Longest first</option>
-          <option value="grade">Grade</option>
-          <option value="name">Name</option>
-        </select>
-      </label>
-    </div>
-
-    <div class="cards" id="cards"></div>
-    <p class="empty" id="empty" hidden>No trophy matches those filters. Try clearing the search or widening the grade.</p>
-  </section>
-
-  <section id="view-progress" class="view" hidden aria-labelledby="progress-title">
-    <div class="section-head">
-      <div>
-        <h2 id="progress-title">Your progress</h2>
-        <p class="sub">Ticks live in this browser. Export them before changing machine, importing on a new one.</p>
-      </div>
-    </div>
-
-    <div class="progress-layout">
-      <div class="panel">
-        <h3>By phase</h3>
-        <div id="phase-progress" class="stack"></div>
-      </div>
-      <div class="panel">
-        <h3>Save &amp; transfer</h3>
-        <p class="sub">The file is plain JSON: a list of trophy names you have earned. It is also handy as a backup.</p>
-        <div class="button-row">
-          <button class="primary" type="button" id="export">Export progress</button>
-          <label class="file-button">Import progress<input id="import" type="file" accept="application/json"></label>
+    <main id="main">
+      <section id="view-roadmap" class="view" role="tabpanel" aria-labelledby="tab-roadmap" tabindex="0">
+        <div class="view-heading">
+          <div>
+            <p class="kicker">THE LONG WAY ROUND</p>
+            <h2>Route to the platinum</h2>
+          </div>
+          <button id="open-next" class="button primary" type="button">Open next trophy</button>
         </div>
-        <p class="small" id="import-note" role="status"></p>
-        <h3 class="spaced">Danger zone</h3>
-        <div class="button-row">
-          <button class="danger" type="button" id="reset">Clear all ticks</button>
+
+        <div id="roadmap-next" class="next-card" aria-live="polite">
+          <p class="next-kicker">NEXT ON THE ROUTE</p>
+          <p class="loading-line">Building the route…</p>
         </div>
-      </div>
 
-      <div class="panel spoiler-panel">
-      <h3>Spoiler setting</h3>
-      <p class="sub">In spoiler-safe mode, guides that describe story events stay hidden until you reveal them one at a time.</p>
-      <label class="switch">
-        <input type="checkbox" id="spoiler-toggle" checked>
-        <span class="track" aria-hidden="true"></span>
-        <span><strong>Spoiler-safe mode</strong><small>Hide story details behind a reveal button.</small></span>
-      </label>
-      </div>
+        <div id="phase-list" class="phase-grid" aria-label="Trophy phases">
+          <p class="loading-line">Loading phases…</p>
+        </div>
+      </section>
 
-      <div class="panel tips-panel">
-      <h3>Before you start</h3>
-      <ul class="tips">
-        <li><strong>Keep manual saves.</strong> Story choices and a handful of timed encounters are permanent; a save beside them costs nothing.</li>
-        <li><strong>Do the finale last.</strong> Some contacts and side moments close after the endgame. Clean up first, then finish the story.</li>
-        <li><strong>Let counters settle.</strong> Trophies can lag a few seconds behind a mission banner. Check the stats page before replaying anything.</li>
-        <li><strong>Overlap your grinds.</strong> WAiNK check-ins, vehicle discovery and area exploration all happen on the same drive.</li>
-      </ul>
-      </div>
-    </div>
-  </section>
-</main>
+      <section id="view-trophies" class="view" role="tabpanel" aria-labelledby="tab-trophies" tabindex="0" hidden>
+        <div class="view-heading">
+          <div>
+            <p class="kicker">THE FULL SET</p>
+            <h2>All 55 trophies</h2>
+          </div>
+          <div class="trophy-tools">
+            <p id="result-count" class="result-count">Showing 0 of 55</p>
+            <button id="clear-filters" class="button ghost" type="button">Clear filters</button>
+          </div>
+        </div>
 
-<footer class="foot">
-  <p>Unofficial fan guide. Trophy names and descriptions belong to Rockstar Games. Progress is stored locally in this browser.</p>
-</footer>
+        <div class="filters">
+          <label class="field search-field">
+            <span>Search</span>
+            <input id="search-input" type="search" placeholder="Search trophies…" autocomplete="off">
+          </label>
+          <label class="field">
+            <span>Grade</span>
+            <select id="filter-grade">
+              <option value="all">All grades</option>
+              <option value="platinum">Platinum</option>
+              <option value="gold">Gold</option>
+              <option value="silver">Silver</option>
+              <option value="bronze">Bronze</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Category</span>
+            <select id="filter-category">
+              <option value="all">All categories</option>
+              <option value="Story">Story</option>
+              <option value="Activities">Activities</option>
+              <option value="Crime &amp; Heists">Crime &amp; Heists</option>
+              <option value="Strangers &amp; Freaks">Strangers &amp; Freaks</option>
+              <option value="Collectibles">Collectibles</option>
+              <option value="Exploration">Exploration</option>
+              <option value="Combat &amp; Chaos">Combat &amp; Chaos</option>
+              <option value="Completion">Completion</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Phase</span>
+            <select id="filter-phase">
+              <option value="all">All phases</option>
+              <option value="1">Phase 1</option>
+              <option value="2">Phase 2</option>
+              <option value="3">Phase 3</option>
+              <option value="4">Phase 4</option>
+              <option value="5">Phase 5</option>
+              <option value="6">Phase 6</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Status</span>
+            <select id="filter-status">
+              <option value="all">Everything</option>
+              <option value="earned">Earned</option>
+              <option value="unearned">Not yet earned</option>
+              <option value="missable">Missable only</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Sort</span>
+            <select id="filter-sort">
+              <option value="route">Route order</option>
+              <option value="longest">Longest first</option>
+              <option value="shortest">Shortest first</option>
+              <option value="name">Name A–Z</option>
+            </select>
+          </label>
+        </div>
 
-<dialog id="detail" aria-labelledby="detail-title">
-  <div class="detail-top">
-    <span class="badge" id="detail-grade">Bronze</span>
-    <button class="icon-button" type="button" id="detail-close" aria-label="Close guide">×</button>
+        <div id="trophy-grid" class="trophy-grid" aria-live="polite">
+          <p class="loading-line">Loading trophies…</p>
+        </div>
+      </section>
+
+      <section id="view-progress" class="view" role="tabpanel" aria-labelledby="tab-progress" tabindex="0" hidden>
+        <div class="view-heading">
+          <div>
+            <p class="kicker">YOUR RUN</p>
+            <h2>Your progress</h2>
+          </div>
+        </div>
+
+        <div class="progress-layout">
+          <section class="panel">
+            <div class="section-title">
+              <h3>By phase</h3>
+              <p>A quick read on how each stretch of the route is filling up.</p>
+            </div>
+            <div id="progress-by-phase" class="phase-progress-list"></div>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">
+              <h3>Save &amp; transfer</h3>
+              <p>Keep a copy of your ticks or move them to another browser.</p>
+            </div>
+            <div class="button-row">
+              <button id="export-btn" class="button primary" type="button">Export progress</button>
+              <button id="import-btn" class="button ghost" type="button">Import progress</button>
+              <input id="import-file" type="file" accept="application/json,.json" hidden>
+            </div>
+            <p id="import-status" class="status-note" role="status"></p>
+          </section>
+
+          <section class="panel danger-panel">
+            <div class="section-title">
+              <h3>Danger zone</h3>
+              <p>Wipe every earned mark and start the route from scratch.</p>
+            </div>
+            <button id="clear-all" class="button danger" type="button">Clear all ticks</button>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">
+              <h3>Spoiler setting</h3>
+            </div>
+            <div class="setting-row">
+              <div>
+                <strong>Spoiler-safe mode</strong>
+                <p>Hide story details behind a reveal button.</p>
+              </div>
+              <button id="spoiler-toggle" class="switch is-on" type="button" role="switch" aria-checked="true">
+                <span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span>
+                <span id="spoiler-toggle-text" class="switch-text">ON</span>
+              </button>
+            </div>
+          </section>
+
+          <section class="panel advice-panel">
+            <div class="section-title">
+              <h3>Before you start</h3>
+            </div>
+            <p>Play the story blind the first time. Keep a manual save before big choice moments and chapter breaks, and leave cleanup time for the collectible-heavy phases. If a trophy feels like it could vanish after a mission, treat it as missable and back up first.</p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Leonida Legend is an offline, fan-made planning tool. No account, no tracking, no network beyond your own files.</p>
+    </footer>
   </div>
-  <div id="detail-body"></div>
-</dialog>
 
-<script src="app.js" defer></script>
+  <div id="detail-panel" class="detail-layer" hidden>
+    <div class="detail-scrim" data-close-detail></div>
+    <aside class="detail-sheet" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+      <div class="detail-topbar">
+        <span class="detail-kicker">TROPHY FIELD NOTES</span>
+        <button id="detail-close" class="icon-button" type="button" aria-label="Close trophy details">Close <span aria-hidden="true">×</span></button>
+      </div>
+      <div id="detail-content" class="detail-content"></div>
+    </aside>
+  </div>
+
+  <div id="live-region" class="sr-only" role="status" aria-live="polite"></div>
+
+  <script src="app.js" defer></script>
 </body>
 </html>
