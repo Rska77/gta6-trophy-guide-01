@@ -1,5 +1,6 @@
 [
-  { "file": "1-checklist.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "2-silver.jpg", "path": "/", "grade": "silver", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "3-bronze.jpg", "path": "/", "grade": "bronze", "scroll": 1400, "viewport": { "width": 1280, "height": 800 } }
+  { "file": "1-roadmap.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
+  { "file": "2-trophies.jpg", "path": "/", "view": "trophies", "scroll": 260, "viewport": { "width": 1280, "height": 800 } },
+  { "file": "3-detail.jpg", "path": "/", "view": "trophies", "open": "You WAiNKer!", "scroll": 700, "viewport": { "width": 1280, "height": 800 } },
+  { "file": "4-progress.jpg", "path": "/", "view": "progress", "scroll": 180, "viewport": { "width": 1280, "height": 800 } }
 ]
